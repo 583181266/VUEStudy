@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_事件修饰符</title>
+
+    <style>
+        .father{
+            height: 200px;
+            width: 200px;
+            position: relative;
+            background-color: blue;
+        }
+        .son{
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: red;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        ul{
+            height: 100px;
+            width: 100px;
+            overflow: auto;
+        }
+
+        li{
+            height: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1>你好，{{name}}</h1>
+        <!-- 阻止默认事件 -->
+        <a href="http://www.baidu.com" @click.prevent="showInfo">点我提示信息</a>
+        <!-- 阻止事件冒泡 -->
+        <div class="father" @click="showFather">
+            <div class="son" @click.stop="showSon">
+                son
+            </div>
+        </div>
+        <!-- 事件只触发一次 -->
+        <div @click.once="showInfo">我只能被点击一次</div>
+        <!-- 使用事件的捕获模式 由外到内 -->
+        <div class="father" @click.capture="showFather">
+            <div class="son" @click="showSon">
+                son
+            </div>
+        </div>
+        <!-- 当event.target是当前操作的元素时才触发事件 -->
+        <div class="father" @click.self="showFather">
+            <div class="son" @click="showSon">
+                son
+            </div>
+        </div>
+        <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+        <ul @wheel.passive="doSomething">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+        </ul>
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el:'#root',
+            data:{
+                name:' YISUO',
+            },
+            methods: {
+                showInfo(){
+                    alert("大家好！")
+                },
+                showSon(){
+                    alert("我是儿子")
+                },
+                showFather(){
+                    alert("我是父亲")
+                },
+                doSomething(){
+                    for (let i = 0; i < 100000; i++) {
+                        console.log("$$");    
+                    }
+                }
+            }
+            
+        })
+
+    </script>
+</body>
+</html>
