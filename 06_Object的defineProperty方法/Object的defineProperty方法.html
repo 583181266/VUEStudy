@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object的defineProperty方法</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        let age = 18;
+
+        let person = {
+            name:'章三',
+            gender:'male'
+        }
+
+        Object.defineProperty(person,'age',{
+            // value: 18,  // 添加的属性的值
+            // enumerable:true, // 控制属性是否可以枚举：默认为false
+            // writable:true, // 控制属性是否可以被修改：默认为false
+            // configurable:true // 控制属性是否可以被删除：默认为false
+
+            // 当有人读取了age的属性值的时候，就会调用getter函数，并将返回值作为age的值
+            get(){
+                return age;
+            },
+            // 当有人给age的属性值赋值的时候，就会调用setter函数
+            set(value){
+                age = value;
+            }
+        })
+
+
+        console.log(person);
+
+        console.log(Object.keys(person)); // 将属性列表作为数组返回
+    </script>
+</body>
+</html>
