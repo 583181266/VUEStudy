@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+<body>
+    <div id="root">
+        <h1>当前n的值为:{{n}}</h1>
+        <button @click="addOne">点我 n + 1</button>
+
+        <!-- 可以使用v-show 进行条件渲染， -->
+        <h1 v-show="false">你好，{{name}}</h1>
+
+        <!-- 也可以使用v-if v-else-if v-else 进行条件渲染 -->
+        <h1 v-if="n === 1">AngulerJS</h1>
+        <h1 v-else-if="n === 2">React</h1>
+        <h1 v-else-if="n === 3">Vue</h1>
+        <h1 v-else>JQuery</h1>
+
+        <!-- 也可以配合template 和 v-if进行集体条件渲染 -->
+        <!-- template不会渲染节点出来 -->
+
+        <template v-if="n === 1">
+            <h1>你好</h1>
+            <h1>YISUO</h1>
+            <h1>欢迎使用VUE</h1>
+        
+                
+            
+        </template>
+    </div>
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                name:'YISUO',
+                n:0
+            },
+            methods: {
+              addOne(){
+                this.n++;
+              }  
+            },
+        })
+    </script>
+    
+</body>
+</html>
